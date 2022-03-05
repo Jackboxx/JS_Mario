@@ -2,8 +2,13 @@ import {Vector} from '../engine/vector.js';
 
 class Attributes {
     constructor(){
-        this.position = new Vector(0, 0);
+        this.screenSize = new Vector(800, 700);
+        this.position = new Vector(100, 400);
         this.size = new Vector(40, 40);
+    }
+
+    get getScreenSize(){
+        return this.screenSize;
     }
 
     get getPosition(){

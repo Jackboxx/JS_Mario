@@ -11,13 +11,16 @@ let jumping = false;
 let jumpTimer = 0;
 let startingHeight;
 
+let previousStep = 0;
+
 function move(){
     if (jumping) {
-        velocity.add(new Vector(0, -jumpFunction(jumpTimer) - startingHeight));
+        previousStep = jumpTimer;
         jumpTimer += time.deltaTime;
+        velocity.add(new Vector(0, (jumpFunction(jumpTimer) - jumpFunction(previousStep))));
     }
 
-    attributes.addPosition(velocity);
+    attributes.position.add(velocity);
     velocity = Vector.zero;
 }
 
@@ -26,6 +29,7 @@ function jumpFunction(x) {
 }
 
 function jump() {
+    if(jumping) return;
     startingHeight = attributes.getPosition.y;
     jumping = true;
 }

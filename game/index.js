@@ -1,36 +1,22 @@
 import time from '../engine/time.js';
-import attributes from './attributes.js';
-
-import {move, jump} from './movement.js';
-
-const width = 800;
-const height = 700;
+import {InputManager} from '../engine/input.js';
+import { Renderer } from '../engine/renderer.js';
+import { move } from './movement.js';
 
 const mario = document.getElementById('mario');
 const game_screen = document.getElementById('game_screen');
-const ctx = game_screen.getContext('2d');
+const renderer = new Renderer(game_screen.getContext('2d'));
+const inputManager = new InputManager();
 
-document.addEventListener('keypress', inputListener)
-
-function inputListener(event) {
-    switch (event.code){
-        case 'Space':
-            jump();
-            break;
-    }
-}
+document.addEventListener('keydown', inputManager.down);
+document.addEventListener('keyup', inputManager.up);
 
 function update() {
     time.tick();
+    inputManager.input();
     move();
-    draw();
+    renderer.draw();
     setTimeout(update, 1000 / 60);
-}
-
-function draw(){
-    ctx.fillStyle = 'rgb(255, 0, 0)'
-    ctx.clearRect(0, 0, width, height);
-    ctx.fillRect(attributes.getPosition.x, attributes.getPosition.y, attributes.getSize.x, attributes.getSize.y);
 }
 
 update();

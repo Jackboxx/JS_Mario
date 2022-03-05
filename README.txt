@@ -1,5 +1,3 @@
 --TO-DO--
-    jump is fucked fix
-    
-    create a class for rendering
-    create an input manager
+    create basic character movement (WASD, Jump)
+    create basic collision system and add gravity
