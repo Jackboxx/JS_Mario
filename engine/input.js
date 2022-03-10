@@ -1,22 +1,20 @@
-import {jump} from '../game/movement.js';
+import { jump, walk } from '../game/movement.js';
 
 const pressedKeys = [];
 
-export class InputManager{
+export class InputManager {
     down(event) {
         pressedKeys[event.key] = true;
     }
-    
-    up(event){
+
+    up(event) {
         pressedKeys[event.key] = false;
     }
 
-    input(){
-        if(pressedKeys[' ']) jump();
+    input() {
+        if (pressedKeys[' ']) jump();
 
-        if(pressedKeys['w']) console.log('W');
-        if(pressedKeys['a']) console.log('A');
-        if(pressedKeys['s']) console.log('S');
-        if(pressedKeys['d']) console.log('D');
+        if (pressedKeys['a'] || pressedKeys['ArrowLeft']) walk(-1);
+        if (pressedKeys['d'] || pressedKeys['ArrowRight']) walk(1);
     }
 }

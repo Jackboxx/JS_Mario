@@ -1,29 +1,44 @@
-import {Vector} from '../engine/vector.js';
+import { Vector } from '../engine/vector.js';
 
 class Attributes {
-    constructor(){
+    constructor() {
         this.screenSize = new Vector(800, 700);
         this.position = new Vector(100, 400);
         this.size = new Vector(40, 40);
+        this.speed = 10;
+        this.jumpDuration = 1000; //in ms
+        this.jumpHeight = 200;
     }
 
-    get getScreenSize(){
+    get getScreenSize() {
         return this.screenSize;
     }
 
-    get getPosition(){
+    get getPosition() {
         return this.position;
-    }     
+    }
 
-    get getSize(){
+    get getSize() {
         return this.size;
     }
 
-    setPosition(position){
+    get getSpeed() {
+        return this.speed;
+    }
+
+    get getJumpDuration() {
+        return this.jumpDuration;
+    }
+
+    get getJumpHeight() {
+        return this.jumpHeight;
+    }
+
+    setPosition(position) {
         this.position = position;
     }
 
-    addPosition(term){
+    addPosition(term) {
         this.position.add(term);
     }
 }

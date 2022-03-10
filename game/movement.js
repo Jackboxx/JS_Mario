@@ -4,16 +4,13 @@ import time from '../engine/time.js';
 
 let velocity = Vector.zero;
 
-const jumpDuration = 1000;
-const jumpHeight = 200;
-
 let jumping = false;
 let jumpTimer = 0;
 let startingHeight;
 
 let previousStep = 0;
 
-function move(){
+function move() {
     if (jumping) {
         previousStep = jumpTimer;
         jumpTimer += time.deltaTime;
@@ -25,13 +22,17 @@ function move(){
 }
 
 function jumpFunction(x) {
-    return ((4 * jumpHeight) / (jumpDuration * jumpDuration)) * ((x - (jumpDuration / 2)) * (x - (jumpDuration / 2))) - jumpHeight;
+    return ((4 * attributes.getJumpHeight) / (attributes.getJumpDuration * attributes.getJumpDuration)) * ((x - (attributes.getJumpDuration / 2)) * (x - (attributes.getJumpDuration / 2))) - attributes.getJumpHeight;
+}
+
+function walk(direction) {
+    velocity.add(Vector.right.scaled(direction * attributes.getSpeed));
 }
 
 function jump() {
-    if(jumping) return;
+    if (jumping) return;
     startingHeight = attributes.getPosition.y;
     jumping = true;
 }
 
-export {move, jump};
+export { move, jump, walk };
