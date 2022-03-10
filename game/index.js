@@ -1,5 +1,5 @@
 import time from '../engine/time.js';
-import {InputManager} from '../engine/input.js';
+import { InputManager } from '../engine/input.js';
 import { Renderer } from '../engine/renderer.js';
 import { move } from './movement.js';
 
@@ -11,12 +11,12 @@ const inputManager = new InputManager();
 document.addEventListener('keydown', inputManager.down);
 document.addEventListener('keyup', inputManager.up);
 
-function update() {
+function update(timestep) {
     time.tick();
     inputManager.input();
     move();
     renderer.draw();
-    setTimeout(update, 1000 / 60);
+    requestAnimationFrame(update);
 }
 
-update();
+requestAnimationFrame(update);
