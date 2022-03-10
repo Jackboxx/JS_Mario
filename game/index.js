@@ -11,7 +11,7 @@ const inputManager = new InputManager();
 document.addEventListener('keydown', inputManager.down);
 document.addEventListener('keyup', inputManager.up);
 
-function update(timestep) {
+function update() {
     time.tick();
     inputManager.input();
     move();

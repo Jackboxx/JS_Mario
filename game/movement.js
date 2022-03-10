@@ -3,12 +3,14 @@ import attributes from './attributes.js';
 import time from '../engine/time.js';
 
 let velocity = Vector.zero;
+let acceleration = Vector.zero;
 
 let jumping = false;
 let jumpTimer = 0;
 let startingHeight;
 
 let previousStep = 0;
+let previousDirection = 0;
 
 function move() {
     if (jumping) {
@@ -26,7 +28,12 @@ function jumpFunction(x) {
 }
 
 function walk(direction) {
-    velocity.add(Vector.right.scaled(direction * attributes.getSpeed));
+    if (direction != previousDirection) {
+        acceleration = Vector.right.scaled(previousDirection * attributes.getAcceleration);
+        previousDirection = direction;
+    }
+    if (Math.abs(acceleration.x) < attributes.getMaxAcceleration) acceleration.add(Vector.right.scaled(direction * attributes.getAcceleration));
+    velocity.add(acceleration.scaled(attributes.getSpeed));
 }
 
 function jump() {

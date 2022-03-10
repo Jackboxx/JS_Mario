@@ -6,7 +6,9 @@ class Attributes {
         this.position = new Vector(100, 400);
         this.size = new Vector(40, 40);
         this.speed = 10;
-        this.jumpDuration = 1000; //in ms
+        this.acceleration = 0.02;
+        this.maxAcceleration = 1;
+        this.jumpDuration = 1000; // in ms
         this.jumpHeight = 200;
     }
 
@@ -24,6 +26,14 @@ class Attributes {
 
     get getSpeed() {
         return this.speed;
+    }
+
+    get getAcceleration() {
+        return this.acceleration;
+    }
+
+    get getMaxAcceleration() {
+        return this.maxAcceleration;
     }
 
     get getJumpDuration() {
