@@ -10,6 +10,9 @@ class Attributes {
         this.maxAcceleration = 1;
         this.jumpDuration = 1000; // in ms
         this.jumpHeight = 200;
+        this.sprites = [];
+        this.sprites[0] = new Image();
+        this.sprites[0].src = '../sprites/mario.png';
     }
 
     get getScreenSize() {
