@@ -1,4 +1,5 @@
 import { Vector } from '../engine/vector.js';
+import { Entity } from '../engine/entity.js';
 import player from './mario.js';
 import time from '../engine/time.js';
 
@@ -12,7 +13,11 @@ let startingHeight;
 let previousStep = 0;
 let previousDirection = 0;
 
+const other = new Entity(new Vector(200, 400), new Vector(80, 80));
+
 function move() {
+    console.log(other.isTouching(player.position, player.size));
+
     if (jumping) {
         previousStep = jumpTimer;
         jumpTimer += time.deltaTime;

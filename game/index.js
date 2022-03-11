@@ -18,9 +18,7 @@ function update(timestep) {
         start = timestep;
     }
 
-    let elapsedtime = timestep - start;
-
-    time.tick(elapsedtime);
+    time.tick(timestep - start);
     inputManager.input();
     move();
     renderer.draw();

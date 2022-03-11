@@ -1,13 +1,12 @@
 import { Vector } from '../engine/vector.js';
+import { Entity } from '../engine/entity.js';
 
 let lastStepTime = 0;
 let animationStep = 1;
 
-class Player {
-    constructor() {
-        this.screenSize = new Vector(800, 700);
-        this.position = new Vector(100, 400);
-        this.size = new Vector(40, 40);
+class Player extends Entity {
+    constructor(position, size) {
+        super(position, size)
         this.speed = 10;
         this.acceleration = 0.02;
         this.maxAcceleration = 1;
@@ -31,18 +30,6 @@ class Player {
             "turn_r": '../sprites/turn_r.png',
             "turn_l": '../sprites/turn_l.png'
         };
-    }
-
-    get getScreenSize() {
-        return this.screenSize;
-    }
-
-    get getPosition() {
-        return this.position;
-    }
-
-    get getSize() {
-        return this.size;
     }
 
     get getSpeed() {
@@ -103,7 +90,7 @@ class Player {
 }
 
 
-const instance = new Player();
+const instance = new Player(new Vector(100, 400), new Vector(40, 40));
 Object.freeze(instance);
 
 export default instance;
