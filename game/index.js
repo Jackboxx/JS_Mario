@@ -11,8 +11,16 @@ const inputManager = new InputManager();
 document.addEventListener('keydown', inputManager.down);
 document.addEventListener('keyup', inputManager.up);
 
-function update() {
-    time.tick();
+let start;
+
+function update(timestep) {
+    if (start === undefined) {
+        start = timestep;
+    }
+
+    let elapsedtime = timestep - start;
+
+    time.tick(elapsedtime);
     inputManager.input();
     move();
     renderer.draw();

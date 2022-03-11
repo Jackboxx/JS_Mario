@@ -1,2 +1,3 @@
 --TO-DO--
-    create basic collision system and add gravity
+	fix animations
+    	create basic collision system and add gravity
