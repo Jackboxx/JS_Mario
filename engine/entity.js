@@ -1,7 +1,9 @@
 export class Entity {
-    constructor(position, size) {
+    constructor(position, size, sprite) {
         this.position = position;
         this.size = size;
+        this.sprite = new Image;
+        this.sprite.src = sprite;
         this.exists = true;
     }
 
@@ -11,6 +13,10 @@ export class Entity {
 
     get getSize() {
         return this.size;
+    }
+
+    get getCurrentSprite() {
+        return this.sprite;
     }
 
     remove() {

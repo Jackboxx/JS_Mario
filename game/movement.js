@@ -1,6 +1,5 @@
 import { Vector } from '../engine/vector.js';
-import { Entity } from '../engine/entity.js';
-import player from './mario.js';
+import manager from './manager.js';
 import time from '../engine/time.js';
 
 let velocity = Vector.zero;
@@ -13,18 +12,15 @@ let startingHeight;
 let previousStep = 0;
 let previousDirection = 0;
 
-const other = new Entity(new Vector(200, 400), new Vector(80, 80));
+const player = manager.getEntity("player");
 
 function move() {
-    console.log(other.isTouching(player.position, player.size));
-
     if (jumping) {
         previousStep = jumpTimer;
         jumpTimer += time.deltaTime;
         velocity.add(new Vector(0, (jumpFunction(jumpTimer) - jumpFunction(previousStep))));
     }
 
-    player.setCurrentSprite((velocity.length > 0), jumping, velocity.x, time.elapsedtime, velocity.length);
     player.position.add(velocity);
     velocity = Vector.zero;
 }

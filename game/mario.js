@@ -12,7 +12,7 @@ class Player extends Entity {
         this.maxAcceleration = 1;
         this.jumpDuration = 1000; // in ms
         this.jumpHeight = 200;
-        this.currentSprite = new Image();
+        this.sprite = new Image();
 
         this.sprites = {
             "idle_r": '../sprites/idle_r.png',
@@ -52,14 +52,6 @@ class Player extends Entity {
         return this.jumpHeight;
     }
 
-    get getMirrorOffset() {
-        return this.mirrorOffset;
-    }
-
-    get getCurrentSprite() {
-        return this.currentSprite;
-    }
-
     setPosition(position) {
         this.position = position;
     }
@@ -75,7 +67,6 @@ class Player extends Entity {
         if (jumping) {
             animation = `jump_${sufix}`;
         } else if (moving) {
-            //step forward on frame every 333.33.. ms
             if (currentStep - lastStepTime > (1000 / cycleSpeed)) {
                 animationStep++;
                 lastStepTime = currentStep;
@@ -85,7 +76,7 @@ class Player extends Entity {
         } else {
             animation = `idle_${sufix}`;
         }
-        this.currentSprite.src = this.sprites[animation];
+        this.sprite.src = this.sprites[animation];
     }
 }
 
