@@ -1,34 +1,17 @@
+import { layers, sprites } from "./data.js";
+
 export class Entity {
-    constructor(position, size, sprite) {
+    constructor(position, size, layer, sprite) {
         this.position = position;
         this.size = size;
+        this.layer = layers[layer];
         this.sprite = new Image;
-        this.sprite.src = sprite;
+        this.sprite.src = sprites[sprite];
         this.exists = true;
-    }
-
-    get getPosition() {
-        return this.position;
-    }
-
-    get getSize() {
-        return this.size;
-    }
-
-    get getCurrentSprite() {
-        return this.sprite;
     }
 
     remove() {
         this.exists = false;
-    }
-
-    setPosition(position) {
-        this.position = position;
-    }
-
-    addPosition(term) {
-        this.position.add(term);
     }
 
     isTouching(otherPosition, otherSize) {

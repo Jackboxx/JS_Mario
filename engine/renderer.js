@@ -7,10 +7,10 @@ export class Renderer {
 
     draw() {
         //this function will need to get data from a scene or screen to know what to draw
-        this.context.clearRect(0, 0, manager.getScreenSize.x, manager.getScreenSize.y);
-        for (let name in manager.getAllEntities) {
-            let entity = manager.getEntity(name);
-            this.context.drawImage(entity.getCurrentSprite, entity.getPosition.x, entity.getPosition.y, entity.getSize.x, entity.getSize.y);
+        this.context.clearRect(0, 0, manager.screenSize.x, manager.screenSize.y);
+        for (let name in manager.entities) {
+            let entity = manager.entities[name];
+            this.context.drawImage(entity.sprite, entity.position.x, entity.position.y, entity.size.x, entity.size.y);
         }
     }
 }

@@ -1,3 +1,4 @@
+import { sprites } from '../engine/data.js';
 import { Vector } from '../engine/vector.js';
 import { Entity } from '../engine/entity.js';
 
@@ -6,77 +7,32 @@ let animationStep = 1;
 
 class Player extends Entity {
     constructor(position, size) {
-        super(position, size)
+        super(position, size, 1, 'mario_idle_r');
         this.speed = 10;
         this.acceleration = 0.02;
         this.maxAcceleration = 1;
         this.jumpDuration = 1000; // in ms
         this.jumpHeight = 200;
-        this.sprite = new Image();
-
-        this.sprites = {
-            "idle_r": '../sprites/idle_r.png',
-            "idle_l": '../sprites/idle_l.png',
-            "death": '../sprites/death.png',
-            "victory": '../sprites/victory.png',
-            "run_r_1": '../sprites/run_r_1.png',
-            "run_r_2": '../sprites/run_r_2.png',
-            "run_r_3": '../sprites/run_r_3.png',
-            "run_l_1": '../sprites/run_l_1.png',
-            "run_l_2": '../sprites/run_l_2.png',
-            "run_l_3": '../sprites/run_l_3.png',
-            "jump_r": '../sprites/jump_r.png',
-            "jump_l": '../sprites/jump_l.png',
-            "turn_r": '../sprites/turn_r.png',
-            "turn_l": '../sprites/turn_l.png'
-        };
     }
 
-    get getSpeed() {
-        return this.speed;
-    }
-
-    get getAcceleration() {
-        return this.acceleration;
-    }
-
-    get getMaxAcceleration() {
-        return this.maxAcceleration;
-    }
-
-    get getJumpDuration() {
-        return this.jumpDuration;
-    }
-
-    get getJumpHeight() {
-        return this.jumpHeight;
-    }
-
-    setPosition(position) {
-        this.position = position;
-    }
-
-    addPosition(term) {
-        this.position.add(term);
-    }
-
-    setCurrentSprite(moving, jumping, direction, currentStep, cycleSpeed) {
+    setCurrentSprite(moving, jumping, direction, currentTimeStep, cycleSpeed) {
         let sufix = (direction >= 0) ? 'r' : 'l';
-        let animation = "";
+        let animation = "mario_";
 
         if (jumping) {
-            animation = `jump_${sufix}`;
+            animation += `jump_${sufix}`;
         } else if (moving) {
-            if (currentStep - lastStepTime > (1000 / cycleSpeed)) {
+            if (currentTimeStep - lastStepTime > (1000 / cycleSpeed)) {
                 animationStep++;
-                lastStepTime = currentStep;
+                lastStepTime = currentTimeStep;
             }
             if (animationStep > 3) animationStep = 1;
-            animation = `run_${sufix}_${animationStep}`;
+            animation += `run_${sufix}_${animationStep}`;
         } else {
-            animation = `idle_${sufix}`;
+            animation += `idle_${sufix}`;
         }
-        this.sprite.src = this.sprites[animation];
+        console.log(animation);
+        this.sprite.src = sprites[animation];
     }
 }
 

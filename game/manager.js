@@ -8,20 +8,8 @@ class Manager extends Entity {
         this.screenSize = screenSize;
         this.entities = {
             "player": player,
-            "ground": new Entity(new Vector(0, 440), new Vector(800, 260), '../sprites/idle_r.png')
+            "ground": new Entity(new Vector(0, 440), new Vector(800, 260), 2, 'mario_idle_r')
         };
-    }
-
-    get getScreenSize() {
-        return this.screenSize;
-    }
-
-    get getAllEntities() {
-        return this.entities;
-    }
-
-    getEntity(name) {
-        return this.entities[name];
     }
 }
 

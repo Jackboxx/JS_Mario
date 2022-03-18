@@ -12,7 +12,7 @@ let startingHeight;
 let previousStep = 0;
 let previousDirection = 0;
 
-const player = manager.getEntity("player");
+const player = manager.entities["player"];
 
 function move() {
     if (jumping) {
@@ -22,25 +22,26 @@ function move() {
     }
 
     player.position.add(velocity);
+    player.setCurrentSprite(velocity.length > 0, jumping, velocity.x, time.elapsedtime, velocity.length);
     velocity = Vector.zero;
 }
 
 function jumpFunction(x) {
-    return ((4 * player.getJumpHeight) / (player.getJumpDuration * player.getJumpDuration)) * ((x - (player.getJumpDuration / 2)) * (x - (player.getJumpDuration / 2))) - player.getJumpHeight;
+    return ((4 * player.jumpHeight) / (player.jumpDuration * player.jumpDuration)) * ((x - (player.jumpDuration / 2)) * (x - (player.jumpDuration / 2))) - player.jumpHeight;
 }
 
 function walk(direction) {
     if (direction != previousDirection) {
-        acceleration = Vector.right.scaled(previousDirection * player.getAcceleration);
+        acceleration = Vector.right.scaled(previousDirection * player.acceleration);
         previousDirection = direction;
     }
-    if (Math.abs(acceleration.x) < player.getMaxAcceleration) acceleration.add(Vector.right.scaled(direction * player.getAcceleration));
-    velocity.add(acceleration.scaled(player.getSpeed));
+    if (Math.abs(acceleration.x) < player.maxAcceleration) acceleration.add(Vector.right.scaled(direction * player.acceleration));
+    velocity.add(acceleration.scaled(player.speed));
 }
 
 function jump() {
     if (jumping) return;
-    startingHeight = player.getPosition.y;
+    startingHeight = player.position.y;
     jumping = true;
 }
 
