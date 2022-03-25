@@ -8,7 +8,10 @@ class Manager extends Entity {
         this.screenSize = screenSize;
         this.entities = {
             "player": player,
-            "ground": new Entity(new Vector(0, 440), new Vector(800, 260), 2, 'mario_idle_r')
+            "ground": new Entity(new Vector(0, 440), new Vector(800, 30), 2, ''),
+            "block1": new Entity(new Vector(400, 390), new Vector(40, 40), 2, ''),
+            "block2": new Entity(new Vector(300, 250), new Vector(200, 80), 2, ''),
+            "block3": new Entity(new Vector(150, 250), new Vector(60, 40), 2, '')
         };
     }
 }

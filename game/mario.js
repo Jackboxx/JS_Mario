@@ -8,9 +8,8 @@ let animationStep = 1;
 class Player extends Entity {
     constructor(position, size) {
         super(position, size, 1, 'mario_idle_r');
-        this.speed = 10;
-        this.acceleration = 0.02;
-        this.maxAcceleration = 1;
+        this.acceleration = 0.2;
+        this.maxAcceleration = 10;
         this.jumpDuration = 1000; // in ms
         this.jumpHeight = 200;
     }
@@ -31,13 +30,12 @@ class Player extends Entity {
         } else {
             animation += `idle_${sufix}`;
         }
-        console.log(animation);
         this.sprite.src = sprites[animation];
     }
 }
 
 
-const instance = new Player(new Vector(100, 400), new Vector(40, 40));
+const instance = new Player(new Vector(100, 399), new Vector(40, 40));
 Object.freeze(instance);
 
 export default instance;

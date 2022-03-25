@@ -52,7 +52,15 @@ export class Vector {
     subtract(vector) {
         this.x -= vector.x;
         this.y -= vector.y;
-        return new this;
+        return this;
+    }
+
+    added(vector) {
+        return new Vector(this.x + vector.x, this.y + vector.y);
+    }
+
+    subtracted(vector) {
+        return new Vector(this.x - vector.x, this.y - vector.y);
     }
 
     angleBetween(vector) {
