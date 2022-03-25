@@ -1,2 +1,4 @@
 --TO-DO--
-    create basic collision system and add gravity
+	-add enemies and death system
+	-add main menu
+	-create level
