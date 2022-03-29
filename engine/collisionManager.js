@@ -6,7 +6,7 @@ class CollisionManager {
     checkCollision() {
         for (let i = 0; i < manager.allObjects().length; i++) {
             let object = manager.allObjects()[i];
-            if (CollisionManager.isTouching(player, object)) player.onCollision(object);
+            if (player.alive && CollisionManager.isTouching(player, object)) player.onCollision(object);
 
             for (let j = 0; j < manager.allEnemies().length; j++) {
                 let enemy = manager.allEnemies()[j];

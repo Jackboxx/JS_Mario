@@ -8,14 +8,16 @@ import manager from './manager.js';
 export class Goomba extends Entity {
     velocity = Vector.zero;
     acceleration = Vector.zero;
+    speed = 1.5;
+
     lastStepTime = 0;
     animationStep = 1;
     grounded = true;
-    alive = true;
+
 
     constructor(position, size) {
         super(position, size, 3);
-        this.speed = 1.5;
+        this.alive = true;
     }
 
     move(goomba, player) {
@@ -69,9 +71,5 @@ export class Goomba extends Entity {
     die() {
         this.alive = false;
         this.sprite.src = sprites['goomba_death'];
-    }
-
-    isAlive() {
-        return this.alive;
     }
 }

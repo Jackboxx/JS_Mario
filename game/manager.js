@@ -19,7 +19,7 @@ class Manager extends Entity {
             "block1": new Entity(new Vector(400, 390), new Vector(40, 40), 2, ''),
             "block2": new Entity(new Vector(300, 250), new Vector(200, 80), 2, ''),
             "block3": new Entity(new Vector(150, 250), new Vector(60, 40), 2, ''),
-            "goomba": new Goomba(new Vector(150, 310), new Vector(60, 40)),
+            "goomba": new Goomba(new Vector(200, 310), new Vector(60, 40)),
         };
     }
 

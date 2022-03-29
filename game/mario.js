@@ -30,6 +30,7 @@ class Player extends Entity {
 
     constructor(position, size) {
         super(position, size, 1, 'mario_idle_r');
+        this.alive = true;
     }
 
     move() {
@@ -85,7 +86,7 @@ class Player extends Entity {
     }
 
     onEnemyCollision(enemy) {
-        if (!enemy.isAlive()) return;
+        if (!enemy.alive) return;
 
         let previous = new Entity(this.previousPosition, this.size, 1);
 
@@ -94,7 +95,7 @@ class Player extends Entity {
             this.stopJump();
             this.acceleration.y = -10;
         } else {
-            console.log("YOU DIED");
+            this.die();
         }
     }
 
@@ -142,6 +143,11 @@ class Player extends Entity {
             animation += `idle_${sufix}`;
         }
         this.sprite.src = sprites[animation];
+    }
+
+    die() {
+        this.alive = false;
+        this.sprite.src = sprites['mario_death'];
     }
 }
 
