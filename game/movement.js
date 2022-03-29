@@ -73,6 +73,20 @@ function onCollision(other) {
     }
 }
 
+function onEnemyCollision(enemy) {
+    if (!enemy.isAlive()) return;
+
+    let previous = new Entity(player.previousPosition, player.size, 1);
+
+    if (CollisionManager.above(player, enemy) && (CollisionManager.left(previous, enemy) | CollisionManager.right(previous, enemy)) && acceleration.y > 0) {
+        enemy.die();
+        stopJump();
+        acceleration.y = -10;
+    } else {
+        console.log("YOU DIED");
+    }
+}
+
 function jumpFunction(x) {
     return ((4 * player.jumpHeight) / (player.jumpDuration * player.jumpDuration)) * ((x - (player.jumpDuration / 2)) * (x - (player.jumpDuration / 2))) - player.jumpHeight;
 }
@@ -100,4 +114,4 @@ function stopJump() {
     jumpTimer = 0;
 }
 
-export { move, jump, walk, onCollision };
+export { move, jump, walk, onCollision, onEnemyCollision };

@@ -1,6 +1,8 @@
-import { jump, walk } from '../game/movement.js';
+import manager from '../game/manager.js';
+
 
 const pressedKeys = [];
+const player = manager.entities['player'];
 
 export class InputManager {
     down(event) {
@@ -12,9 +14,9 @@ export class InputManager {
     }
 
     input() {
-        if (pressedKeys[' ']) jump();
+        if (pressedKeys[' ']) player.jump();
 
-        if (pressedKeys['a'] || pressedKeys['ArrowLeft']) walk(-1);
-        if (pressedKeys['d'] || pressedKeys['ArrowRight']) walk(1);
+        if (pressedKeys['a'] || pressedKeys['ArrowLeft']) player.walk(-1);
+        if (pressedKeys['d'] || pressedKeys['ArrowRight']) player.walk(1);
     }
 }

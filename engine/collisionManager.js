@@ -1,28 +1,24 @@
 import manager from '../game/manager.js';
-import { onCollision } from '../game/movement.js';
+
 const player = manager.entities['player'];
 
 class CollisionManager {
     checkCollision() {
-        let objects = [];
-        let enemies = [];
+        for (let i = 0; i < manager.allObjects().length; i++) {
+            let object = manager.allObjects()[i];
+            if (CollisionManager.isTouching(player, object)) player.onCollision(object);
 
-        for (let name in manager.entities) {
-            let entity = manager.entities[name];
-            if (entity.layer === 'object') objects.push(entity);
-            if (entity.layer === 'enemy') enemies.push(entity);
-        }
-
-        for (let i = 0; i < objects.length; i++) {
-            let object = objects[i];
-            if (CollisionManager.isTouching(player, object)) onCollision(object);
-
-            for (let j = 0; j < enemies.length; j++) {
-                let enemy = enemies[j];
+            for (let j = 0; j < manager.allEnemies().length; j++) {
+                let enemy = manager.allEnemies()[j];
                 if (CollisionManager.isTouching(enemy, object)) {
                     enemy.onCollision(enemy, object);
                 }
             }
+        }
+
+        for (let i = 0; i < manager.allEnemies().length; i++) {
+            let enemy = manager.allEnemies()[i];
+            if (CollisionManager.isTouching(player, enemy)) player.onEnemyCollision(enemy);
         }
     }
 

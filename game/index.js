@@ -1,9 +1,9 @@
-import time from '../engine/time.js';
 import { CollisionManager } from '../engine/collisionManager.js';
 import { InputManager } from '../engine/input.js';
 import { Renderer } from '../engine/renderer.js';
-import { move } from './movement.js';
-import { update as updateMovement } from './movementManager.js';
+import { moveEntities } from './movementManager.js';
+import time from '../engine/time.js';
+import manager from './manager.js';
 
 const game_screen = document.getElementById('game_screen');
 const renderer = new Renderer(game_screen.getContext('2d'));
@@ -19,11 +19,10 @@ function update(timestep) {
     if (start === undefined) {
         start = timestep;
     }
-
     time.tick(timestep - start);
+    manager.update();
     inputManager.input();
-    move();
-    updateMovement();
+    moveEntities();
     collisionManager.checkCollision();
     renderer.draw();
     requestAnimationFrame(update);

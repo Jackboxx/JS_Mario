@@ -3,21 +3,15 @@ import { sprites } from '../engine/data.js';
 import { Vector } from '../engine/vector.js';
 import { CollisionManager } from '../engine/collisionManager.js';
 import time from '../engine/time.js';
-
-let lastStepTime = 0;
-let animationStep = 1;
-
-const gravity = .8;
-const maxVerticalAcceleration = 150;
-
-
-
+import manager from './manager.js';
 
 export class Goomba extends Entity {
-    acceleration = Vector.zero;
     velocity = Vector.zero;
-
+    acceleration = Vector.zero;
+    lastStepTime = 0;
+    animationStep = 1;
     grounded = true;
+    alive = true;
 
     constructor(position, size) {
         super(position, size, 3);
@@ -25,36 +19,36 @@ export class Goomba extends Entity {
     }
 
     move(goomba, player) {
-        if (!grounded) {
-            if (Math.abs(acceleration.y) < maxVerticalAcceleration) acceleration.y += gravity;
+        if (!this.grounded) {
+            if (Math.abs(this.acceleration.y) < manager.airResistance()) this.acceleration.y += manager.worldGravity();
         } else {
-            acceleration.y = 0;
+            this.acceleration.y = 0;
         }
 
-        acceleration.x = (goomba.position.x < player.position.x) ? goomba.speed : -goomba.speed;
+        this.acceleration.x = (goomba.position.x < player.position.x) ? goomba.speed : -goomba.speed;
 
-        velocity.add(acceleration);
+        this.velocity.add(this.acceleration);
         goomba.setPreviousPosition(goomba.position);
-        goomba.position.add(velocity);
+        goomba.position.add(this.velocity);
         goomba.setCurrentSprite(time.elapsedtime);
-        velocity = Vector.zero;
-        grounded = false;
+        this.velocity = Vector.zero;
+        this.grounded = false;
     }
 
     onCollision(goomba, other) {
         let previous = new Entity(goomba.previousPosition, goomba.size, 3);
 
-        if (CollisionManager.above(goomba, other) && (CollisionManager.left(previous, other) | CollisionManager.right(previous, other)) && acceleration.y > 0) {
+        if (CollisionManager.above(goomba, other) && (CollisionManager.left(previous, other) | CollisionManager.right(previous, other)) && this.acceleration.y > 0) {
             goomba.position.y = other.position.y - goomba.size.y;
-            acceleration.y = 0;
-            grounded = true;
+            this.acceleration.y = 0;
+            this.grounded = true;
         }
 
-        if (CollisionManager.left(goomba, other) && (CollisionManager.above(previous, other) | CollisionManager.below(previous, other)) && acceleration.x > 0) {
+        if (CollisionManager.left(goomba, other) && (CollisionManager.above(previous, other) | CollisionManager.below(previous, other)) && this.acceleration.x > 0) {
             goomba.position.x = other.position.x - goomba.size.x;
         }
 
-        if (CollisionManager.right(goomba, other) && (CollisionManager.above(previous, other) | CollisionManager.below(previous, other)) && acceleration.x < 0) {
+        if (CollisionManager.right(goomba, other) && (CollisionManager.above(previous, other) | CollisionManager.below(previous, other)) && this.acceleration.x < 0) {
             goomba.position.x = other.position.x + other.size.x;
         }
     }
@@ -62,13 +56,22 @@ export class Goomba extends Entity {
     setCurrentSprite(currentTimeStep) {
         let animation = 'goomba_walk_';
 
-        if (currentTimeStep - lastStepTime > (1000 / 4)) {
-            animationStep++;
-            lastStepTime = currentTimeStep;
+        if (currentTimeStep - this.lastStepTime > (1000 / 4)) {
+            this.animationStep++;
+            this.lastStepTime = currentTimeStep;
         }
 
-        if (animationStep > 2) animationStep = 1;
-        animation += animationStep;
+        if (this.animationStep > 2) this.animationStep = 1;
+        animation += this.animationStep;
         this.sprite.src = sprites[animation];
+    }
+
+    die() {
+        this.alive = false;
+        this.sprite.src = sprites['goomba_death'];
+    }
+
+    isAlive() {
+        return this.alive;
     }
 }
