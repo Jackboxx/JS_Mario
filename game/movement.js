@@ -34,8 +34,8 @@ function move() {
     }
 
     velocity.add(acceleration);
+    player.setPreviousPosition(player.position);
     player.position.add(velocity);
-    player.previousPosition = player.position.subtracted(velocity);
 
     player.setCurrentSprite(Math.abs(velocity.x), jumping, velocity.x, time.elapsedtime, velocity.length);
     velocity = Vector.zero;

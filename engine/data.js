@@ -19,7 +19,10 @@ const sprites = {
     "mario_jump_r": '../sprites/mario_jump_r.png',
     "mario_jump_l": '../sprites/mario_jump_l.png',
     "mario_turn_r": '../sprites/mario_turn_r.png',
-    "mario_turn_l": '../sprites/mario_turn_l.png'
+    "mario_turn_l": '../sprites/mario_turn_l.png',
+    "goomba_walk_1": '../sprites/goomba_walk_1.png',
+    "goomba_walk_2": '../sprites/goomba_walk_2.png',
+    "goomba_death": '../sprites/goomba_death.png'
 };
 
 

@@ -16,6 +16,13 @@ class CollisionManager {
         for (let i = 0; i < objects.length; i++) {
             let object = objects[i];
             if (CollisionManager.isTouching(player, object)) onCollision(object);
+
+            for (let j = 0; j < enemies.length; j++) {
+                let enemy = enemies[j];
+                if (CollisionManager.isTouching(enemy, object)) {
+                    enemy.onCollision(enemy, object);
+                }
+            }
         }
     }
 
