@@ -22,7 +22,8 @@ const sprites = {
     "mario_turn_l": '../sprites/mario_turn_l.png',
     "goomba_walk_1": '../sprites/goomba_walk_1.png',
     "goomba_walk_2": '../sprites/goomba_walk_2.png',
-    "goomba_death": '../sprites/goomba_death.png'
+    "goomba_death": '../sprites/goomba_death.png',
+    "block": '../sprites/block.png'
 };
 
 

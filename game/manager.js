@@ -21,12 +21,12 @@ class Manager extends Entity {
         this.maxEnemyAmount = 25;
         this.entities = {
             "player": new Player(new Vector(100, 399), new Vector(40, 40)),
-            "ground": new Entity(new Vector(-200, 500), new Vector(1200, 30), 2, ''),
-            "block1": new Entity(new Vector(-200, 350), new Vector(500, 30), 2, ''),
-            "block2": new Entity(new Vector(500, 350), new Vector(500, 30), 2, ''),
-            "block3": new Entity(new Vector(100, 200), new Vector(600, 30), 2, ''),
-            "block4": new Entity(new Vector(0, 50), new Vector(150, 30), 2, ''),
-            "block5": new Entity(new Vector(650, 50), new Vector(150, 30), 2, ''),
+            "block_0": new Entity(new Vector(-200, 500), new Vector(1200, 200), 2, 'block'),
+            "block_1": new Entity(new Vector(-222, 350), new Vector(520, 40), 2, 'block'),
+            "block_2": new Entity(new Vector(520, 350), new Vector(520, 40), 2, 'block'),
+            "block_3": new Entity(new Vector(100, 200), new Vector(600, 40), 2, 'block'),
+            "block_4": new Entity(new Vector(0, 50), new Vector(160, 40), 2, 'block'),
+            "block_5": new Entity(new Vector(640, 50), new Vector(160, 40), 2, 'block'),
         };
     }
 

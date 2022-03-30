@@ -9,14 +9,15 @@ export class Renderer {
         this.context.clearRect(0, 0, manager.screenSize.x, manager.screenSize.y);
         for (let name in manager.entities) {
             let entity = manager.entities[name];
-            this.context.drawImage(entity.sprite, entity.position.x, entity.position.y, entity.size.x, entity.size.y);
+            if (name.includes('block')) {
+                for (let i = 0; i < entity.size.x / 40; i++) {
+                    for (let j = 0; j < entity.size.y / 40; j++) {
+                        this.context.drawImage(entity.sprite, entity.position.x + 40 * i, entity.position.y + 40 * j, 40, 40);
+                    }
+                }
+            } else {
+                this.context.drawImage(entity.sprite, entity.position.x, entity.position.y, entity.size.x, entity.size.y);
+            }
         }
-
-        this.context.fillRect(manager.entities['ground'].position.x, manager.entities['ground'].position.y, manager.entities['ground'].size.x, manager.entities['ground'].size.y)
-        this.context.fillRect(manager.entities['block1'].position.x, manager.entities['block1'].position.y, manager.entities['block1'].size.x, manager.entities['block1'].size.y)
-        this.context.fillRect(manager.entities['block2'].position.x, manager.entities['block2'].position.y, manager.entities['block2'].size.x, manager.entities['block2'].size.y)
-        this.context.fillRect(manager.entities['block3'].position.x, manager.entities['block3'].position.y, manager.entities['block3'].size.x, manager.entities['block3'].size.y)
-        this.context.fillRect(manager.entities['block4'].position.x, manager.entities['block4'].position.y, manager.entities['block4'].size.x, manager.entities['block4'].size.y)
-        this.context.fillRect(manager.entities['block5'].position.x, manager.entities['block5'].position.y, manager.entities['block5'].size.x, manager.entities['block5'].size.y)
     }
 }
