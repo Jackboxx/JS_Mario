@@ -49,7 +49,7 @@ class Player extends Entity {
         this.velocity.add(this.acceleration);
         this.setPreviousPosition(this.position)
         this.position.add(this.velocity);
-
+        this.handleScreenLeave();
         this.setCurrentSprite(this.velocity.x, time.elapsedtime, this.velocity.length);
         this.velocity = Vector.zero;
         if (!this.moving) this.acceleration.x = 0;
@@ -88,14 +88,22 @@ class Player extends Entity {
     onEnemyCollision(enemy) {
         if (!enemy.alive) return;
 
-        let previous = new Entity(this.previousPosition, this.size, 1);
-
-        if (CollisionManager.above(this, enemy) && (CollisionManager.left(previous, enemy) | CollisionManager.right(previous, enemy)) && this.acceleration.y > 0) {
+        if (this.position.y + this.size.y < enemy.position.y + enemy.size.y * .5) {
             enemy.die();
             this.stopJump();
             this.acceleration.y = -10;
+            manager.increaseScore();
         } else {
             this.die();
+        }
+    }
+
+    handleScreenLeave() {
+        if (this.position.x < -this.size.x) {
+            this.position.x = manager.screenSize.x;
+        }
+        if (this.position.x > manager.screenSize.x) {
+            this.position.x = -this.size.x;
         }
     }
 
@@ -148,6 +156,10 @@ class Player extends Entity {
     die() {
         this.alive = false;
         this.sprite.src = sprites['mario_death'];
+        setTimeout(() => {
+            alert("GAME OVER");
+            location.reload();
+        }, 200);
     }
 }
 

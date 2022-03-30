@@ -1,10 +1,15 @@
 import { Vector } from "../engine/vector.js";
 import { Entity } from "../engine/entity.js";
 import { Player } from './mario.js';
-import { Goomba } from "./goomba.js";
+
+const maxEnemy = 25;
 
 let enemies = [];
 let objects = [];
+let score = 0;
+let enemyAmount = 0;
+
+const scorePanel = document.getElementById('score');
 
 class Manager extends Entity {
     gravity = .8;
@@ -13,13 +18,15 @@ class Manager extends Entity {
     constructor(position, size, screenSize) {
         super(position, size);
         this.screenSize = screenSize;
+        this.maxEnemyAmount = 25;
         this.entities = {
             "player": new Player(new Vector(100, 399), new Vector(40, 40)),
-            "ground": new Entity(new Vector(0, 440), new Vector(800, 30), 2, ''),
-            "block1": new Entity(new Vector(400, 390), new Vector(40, 40), 2, ''),
-            "block2": new Entity(new Vector(300, 250), new Vector(200, 80), 2, ''),
-            "block3": new Entity(new Vector(150, 250), new Vector(60, 40), 2, ''),
-            "goomba": new Goomba(new Vector(200, 310), new Vector(60, 40)),
+            "ground": new Entity(new Vector(-200, 500), new Vector(1200, 30), 2, ''),
+            "block1": new Entity(new Vector(-200, 350), new Vector(500, 30), 2, ''),
+            "block2": new Entity(new Vector(500, 350), new Vector(500, 30), 2, ''),
+            "block3": new Entity(new Vector(100, 200), new Vector(600, 30), 2, ''),
+            "block4": new Entity(new Vector(0, 50), new Vector(150, 30), 2, ''),
+            "block5": new Entity(new Vector(650, 50), new Vector(150, 30), 2, ''),
         };
     }
 
@@ -32,6 +39,8 @@ class Manager extends Entity {
             if (entity.layer === 'object') objects.push(entity);
             if (entity.layer === 'enemy') enemies.push(entity);
         }
+
+        scorePanel.innerText = 'Score: ' + score;
     }
 
     allEnemies() {
@@ -48,6 +57,26 @@ class Manager extends Entity {
 
     airResistance() {
         return this.maxVerticalAcceleration;
+    }
+
+    increaseScore() {
+        score++;
+    }
+
+    currentScore() {
+        return score;
+    }
+
+    increaseEnemyAmount() {
+        enemyAmount++;
+    }
+
+    decreaseEnemyAmount() {
+        enemyAmount--;
+    }
+
+    currentEnemyAmount() {
+        return enemyAmount;
     }
 }
 

@@ -11,14 +11,14 @@ class CollisionManager {
             for (let j = 0; j < manager.allEnemies().length; j++) {
                 let enemy = manager.allEnemies()[j];
                 if (CollisionManager.isTouching(enemy, object)) {
-                    enemy.onCollision(enemy, object);
+                    enemy.onCollision(object);
                 }
             }
         }
 
         for (let i = 0; i < manager.allEnemies().length; i++) {
             let enemy = manager.allEnemies()[i];
-            if (CollisionManager.isTouching(player, enemy)) player.onEnemyCollision(enemy);
+            if (player.alive && CollisionManager.isTouching(player, enemy)) player.onEnemyCollision(enemy);
         }
     }
 

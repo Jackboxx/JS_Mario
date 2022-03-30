@@ -7,6 +7,6 @@ export function moveEntities() {
 
     for (let i = 0; i < manager.allEnemies().length; i++) {
         let enemy = manager.allEnemies()[i];
-        if (enemy.alive) enemy.move(enemy, player);
+        if (enemy.alive) enemy.move(player);
     }
 }

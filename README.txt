@@ -1,4 +1,5 @@
 --TO-DO--
-	-create Spawner
-	-create level and add SFX
+	-create Spawner --done
+	-create level --done
+	-create HamerBro and add JUICE
 	-add main menu and Score

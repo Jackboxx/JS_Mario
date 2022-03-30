@@ -18,3 +18,11 @@
     left: calc(50% - var(--screen-width) / 2);
     top: calc(50% - var(--screen-height) / 2);
 }
+
+#score {
+    position: absolute;
+    left: 75%;
+    top: 20%;
+    font-size: 2em;
+    border: 3px black solid;
+}

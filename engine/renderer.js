@@ -16,5 +16,7 @@ export class Renderer {
         this.context.fillRect(manager.entities['block1'].position.x, manager.entities['block1'].position.y, manager.entities['block1'].size.x, manager.entities['block1'].size.y)
         this.context.fillRect(manager.entities['block2'].position.x, manager.entities['block2'].position.y, manager.entities['block2'].size.x, manager.entities['block2'].size.y)
         this.context.fillRect(manager.entities['block3'].position.x, manager.entities['block3'].position.y, manager.entities['block3'].size.x, manager.entities['block3'].size.y)
+        this.context.fillRect(manager.entities['block4'].position.x, manager.entities['block4'].position.y, manager.entities['block4'].size.x, manager.entities['block4'].size.y)
+        this.context.fillRect(manager.entities['block5'].position.x, manager.entities['block5'].position.y, manager.entities['block5'].size.x, manager.entities['block5'].size.y)
     }
 }
