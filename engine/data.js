@@ -2,7 +2,8 @@ const layers = {
     "0": "none",
     "1": "player",
     "2": "object",
-    "3": "enemy"
+    "3": "enemy",
+    "4": "projectile",
 }
 
 const sprites = {
@@ -23,8 +24,23 @@ const sprites = {
     "goomba_walk_1": '../sprites/goomba_walk_1.png',
     "goomba_walk_2": '../sprites/goomba_walk_2.png',
     "goomba_death": '../sprites/goomba_death.png',
-    "block": '../sprites/block.png'
+    "hammer_bro_throwing_l": '../sprites/hammer_bro_throwing_l.png',
+    "hammer_bro_throwing_r": '../sprites/hammer_bro_throwing_r.png',
+    "hammer_bro_walk_1_l": '../sprites/hammer_bro_walk_1_l.png',
+    "hammer_bro_walk_1_r": '../sprites/hammer_bro_walk_1_r.png',
+    "hammer_bro_walk_2_l": '../sprites/hammer_bro_walk_2_l.png',
+    "hammer_bro_walk_2_r": '../sprites/hammer_bro_walk_2_r.png',
+    "hammer_bro_dead": '../sprites/hammer_bro_dead.png',
+    "hammer_l": '../sprites/hammer_l.png',
+    "hammer_r": '../sprites/hammer_r.png',
+    "block": '../sprites/block.png',
+    "explosion_1": '../sprites/explosion_1.png',
+    "explosion_2": '../sprites/explosion_2.png'
 };
 
+const sounds = {
+    "juice": '../sounds/juice.mp3',
+    "mario_jump": '../sounds/mario_jump.mp3',
+}
 
-export { layers, sprites };
+export { layers, sprites, sounds };

@@ -1,4 +1,4 @@
-import { sprites } from '../engine/data.js';
+import { sprites, sounds } from '../engine/data.js';
 import { Vector } from '../engine/vector.js';
 import { Entity } from '../engine/entity.js';
 import { CollisionManager } from '../engine/collisionManager.js';
@@ -92,7 +92,6 @@ class Player extends Entity {
             enemy.die();
             this.stopJump();
             this.acceleration.y = -10;
-            manager.increaseScore();
         } else {
             this.die();
         }
@@ -127,6 +126,8 @@ class Player extends Entity {
         this.startingHeight = this.position.y;
         this.jumping = true;
         this.grounded = false;
+        let sfx = new Audio(sounds['mario_jump']);
+        sfx.play();
     }
 
     stopJump() {

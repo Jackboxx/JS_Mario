@@ -1,5 +1,7 @@
 --TO-DO--
-	-create Spawner --done
-	-create level --done
-	-create HamerBro and add JUICE
-	-add main menu and Score
+	-add Spawner --done
+	-add level --done
+	-add Score --done
+	-add HamerBro
+	-add JUICE
+	-add main menu 

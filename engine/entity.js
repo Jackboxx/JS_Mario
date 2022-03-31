@@ -5,6 +5,7 @@ class Entity {
     constructor(position, size, layer = 0, sprite = '') {
         this.position = position;
         this.size = size;
+        this.name = '';
         this.layer = layers[layer];
         this.sprite = new Image;
         this.previousPosition = Vector.zero;

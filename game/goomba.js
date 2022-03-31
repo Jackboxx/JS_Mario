@@ -18,7 +18,7 @@ export class Goomba extends Entity {
         super(position, size, 3);
         this.alive = true;
         this.cost = 2;
-        this.name = 'goomba_';
+        this.name = 'goomba_' + manager.currentEnemyID();
         this.acceleration.x = this.speed * (this.position.x - manager.screenSize.x / 2 > 0) ? -1 : 1;
     }
 
@@ -65,7 +65,7 @@ export class Goomba extends Entity {
     setCurrentSprite(currentTimeStep) {
         let animation = 'goomba_walk_';
 
-        if (currentTimeStep - this.lastStepTime > (1000 / 4)) {
+        if (currentTimeStep - this.lastStepTime > 250) {
             this.animationStep++;
             this.lastStepTime = currentTimeStep;
         }
@@ -79,8 +79,15 @@ export class Goomba extends Entity {
         this.alive = false;
         this.sprite.src = sprites['goomba_death'];
         manager.decreaseEnemyAmount();
+        manager.increaseScore();
         setTimeout(() => {
-            delete manager.entities[this.name];
-        }, 1000);
+            this.sprite.src = sprites['explosion_1'];
+            setTimeout(() => {
+                this.sprite.src = sprites['explosion_2'];
+                setTimeout(() => {
+                    delete manager.entities[this.name];
+                }, 150);
+            }, 50);
+        }, 200);
     }
 }

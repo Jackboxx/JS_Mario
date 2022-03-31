@@ -18,7 +18,26 @@ class CollisionManager {
 
         for (let i = 0; i < manager.allEnemies().length; i++) {
             let enemy = manager.allEnemies()[i];
-            if (player.alive && CollisionManager.isTouching(player, enemy)) player.onEnemyCollision(enemy);
+            for (let j = 0; j < manager.allFriendlyProjectiles().length; j++) {
+                let projectile = manager.allFriendlyProjectiles()[j];
+                console.log(manager.allFriendlyProjectiles());
+                if (CollisionManager.isTouching(enemy, projectile)) {
+                    enemy.die();
+                    projectile.impact();
+                    break;
+                }
+            }
+
+            if (player.alive && enemy.alive && CollisionManager.isTouching(player, enemy)) player.onEnemyCollision(enemy);
+        }
+
+        for (let i = 0; i < manager.allUnfriendlyProjectiles().length; i++) {
+            let projectile = manager.allUnfriendlyProjectiles()[i];
+            if (player.alive && CollisionManager.isTouching(player, projectile)) {
+                player.die();
+                projectile.impact();
+                break;
+            }
         }
     }
 
