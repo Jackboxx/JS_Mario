@@ -14,7 +14,8 @@ export class InputManager {
     }
 
     input() {
-        if (pressedKeys[' ']) player.jump();
+        if (pressedKeys[' '] || pressedKeys['w'] || pressedKeys['ArrowUp']) player.jump();
+        if (pressedKeys['e'] || pressedKeys['s'] || pressedKeys['ArrowDown']) player.useWeapon();
 
         if (pressedKeys['a'] || pressedKeys['ArrowLeft']) player.walk(-1);
         if (pressedKeys['d'] || pressedKeys['ArrowRight']) player.walk(1);

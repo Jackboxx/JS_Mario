@@ -2,6 +2,7 @@
 	-add Spawner --done
 	-add level --done
 	-add Score --done
-	-add HamerBro
+	-add HamerBro --done
+	-add weapon spawner
 	-add JUICE
 	-add main menu 

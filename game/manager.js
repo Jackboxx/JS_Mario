@@ -30,9 +30,9 @@ class Manager extends Entity {
             "block_0": new Entity(new Vector(-200, 500), new Vector(1200, 200), 2, 'block'),
             "block_1": new Entity(new Vector(-222, 350), new Vector(520, 40), 2, 'block'),
             "block_2": new Entity(new Vector(520, 350), new Vector(520, 40), 2, 'block'),
-            "block_3": new Entity(new Vector(100, 200), new Vector(600, 40), 2, 'block'),
-            "block_4": new Entity(new Vector(0, 50), new Vector(160, 40), 2, 'block'),
-            "block_5": new Entity(new Vector(640, 50), new Vector(160, 40), 2, 'block'),
+            "block_3": new Entity(new Vector(140, 200), new Vector(520, 40), 2, 'block'),
+            "block_4": new Entity(new Vector(0, 50), new Vector(200, 40), 2, 'block'),
+            "block_5": new Entity(new Vector(600, 50), new Vector(200, 40), 2, 'block'),
         };
     }
 
@@ -117,7 +117,11 @@ class Manager extends Entity {
         juiceOn = true;
         let music = new Audio(sounds['juice']);
         music.play();
-        setInterval(this.juice, 484000);
+        setInterval(this.startJuice, 484000);
+    }
+
+    isJuiced() {
+        return juiceOn;
     }
 }
 

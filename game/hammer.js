@@ -1,12 +1,13 @@
 import { Projectile } from "../engine/projectile.js";
 import { Vector } from "../engine/vector.js";
+import { sprites } from "../engine/data.js";
 import time from '../engine/time.js';
 import manager from './manager.js';
 
 export class Hammer extends Projectile {
     constructor(position, size, direction) {
         let sufix = (direction > 0) ? 'l' : 'r';
-        super(position, size, direction, false, 'hammer_' + sufix);
+        super(position, size, direction, false, false, 'hammer_' + sufix);
         this.name = 'hammer_' + manager.currentProjectileID();
         this.horizontalSpeed = 2;
         this.velocity = Vector.zero
@@ -18,6 +19,7 @@ export class Hammer extends Projectile {
     }
 
     travel() {
+        if (this.impaced) return;
         this.currentTimeStep += time.deltaTime;
         this.accelleration = new Vector(-this.direction * this.horizontalSpeed, this.throw(this.currentTimeStep) - this.throw(this.lastTimeStep));
         this.velocity.add(this.accelleration);
@@ -29,5 +31,18 @@ export class Hammer extends Projectile {
 
     throw (x) {
         return ((4 * this.throwHeight) / (this.throwDuration * this.throwDuration)) * ((x - (this.throwDuration / 2)) * (x - (this.throwDuration / 2))) - this.throwHeight;
+    }
+
+    impact() {
+        this.impaced = true;
+        setTimeout(() => {
+            this.sprite.src = sprites['explosion_1'];
+            setTimeout(() => {
+                this.sprite.src = sprites['explosion_2'];
+                setTimeout(() => {
+                    delete manager.entities[this.name];
+                }, 150);
+            }, 50);
+        }, 50);
     }
 }

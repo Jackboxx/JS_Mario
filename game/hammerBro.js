@@ -11,7 +11,7 @@ export class HammerBro extends Entity {
     acceleration = Vector.zero;
     speed = 1;
 
-    throwCooldown = 600;
+    throwCooldown = 1200;
     timeLastThrown = 0;
 
     lastTimeStep = 0;

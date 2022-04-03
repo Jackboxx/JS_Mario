@@ -31,7 +31,7 @@ export class Spawner {
         }
 
         let index = Math.floor(Math.random() * spawnPoints.length);
-        let enemy = (Math.random() < 0.1) ? new HammerBro(new Vector(spawnPoints[index].x, spawnPoints[index].y), new Vector(40, 50)) : new Goomba(new Vector(spawnPoints[index].x, spawnPoints[index].y), new Vector(40, 40));
+        let enemy = (Math.random() < 0.12 && manager.isJuiced()) ? new HammerBro(new Vector(spawnPoints[index].x, spawnPoints[index].y), new Vector(40, 50)) : new Goomba(new Vector(spawnPoints[index].x, spawnPoints[index].y), new Vector(40, 40));
 
         if (this.budget >= enemy.cost) {
             manager.entities[enemy.name] = enemy;

@@ -4,6 +4,8 @@ import { Entity } from '../engine/entity.js';
 import { CollisionManager } from '../engine/collisionManager.js';
 import manager from './manager.js';
 import time from '../engine/time.js';
+import { Shotgun } from './shotgun.js';
+import { Railgun } from './railgun.js';
 
 
 
@@ -28,12 +30,17 @@ class Player extends Entity {
     lastStepTime = 0;
     animationStep = 1;
 
+    facingDirection = 1;
+
     constructor(position, size) {
         super(position, size, 1, 'mario_idle_r');
         this.alive = true;
+        this.weapon;
+        this.canMove = true;
     }
 
     move() {
+        if (!this.canMove) return;
         if (this.jumping) {
             this.previousStep = this.jumpTimer;
             this.jumpTimer += time.deltaTime;
@@ -50,9 +57,14 @@ class Player extends Entity {
         this.setPreviousPosition(this.position)
         this.position.add(this.velocity);
         this.handleScreenLeave();
-        this.setCurrentSprite(this.velocity.x, time.elapsedtime, this.velocity.length);
+        this.setCurrentSprite(time.elapsedtime, this.velocity.length);
         this.velocity = Vector.zero;
         if (!this.moving) this.acceleration.x = 0;
+
+        if (this.weapon) {
+            this.weapon.update(this.position, this.facingDirection)
+        }
+
 
         this.moving = false;
         this.grounded = false;
@@ -112,6 +124,7 @@ class Player extends Entity {
 
 
     walk(direction) {
+        this.facingDirection = direction;
         if (direction != this.previousDirection) {
             this.acceleration.x = this.previousDirection * this.accelerationSpeed;
             this.previousDirection = direction;
@@ -122,6 +135,7 @@ class Player extends Entity {
     }
 
     jump() {
+        if (!this.weapon) this.equipWeapon(new Shotgun(new Vector(this.position.x, this.position.y)));
         if (this.jumping || !this.grounded) return;
         this.startingHeight = this.position.y;
         this.jumping = true;
@@ -135,8 +149,22 @@ class Player extends Entity {
         this.jumpTimer = 0;
     }
 
-    setCurrentSprite(direction, currentTimeStep, cycleSpeed) {
-        let sufix = (direction >= 0) ? 'r' : 'l';
+    equipWeapon(weapon) {
+        this.weapon = weapon;
+        manager.entities[weapon.name] = weapon;
+    }
+
+    useWeapon() {
+        if (!this.weapon) return;
+        this.weapon.fire(this.facingDirection);
+        if (this.weapon.ammoCount <= 0) {
+            this.weapon.remove();
+            this.weapon = null;
+        }
+    }
+
+    setCurrentSprite(currentTimeStep, cycleSpeed) {
+        let sufix = (this.facingDirection == 1) ? 'r' : 'l';
         let animation = "mario_";
 
         if (this.jumping) {

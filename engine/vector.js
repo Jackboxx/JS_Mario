@@ -26,6 +26,7 @@ export class Vector {
     }
 
     get normalised() {
+        if (this.length == 0) return Vector.zero;
         return new Vector(this.x / this.length, this.y / this.length);
     }
 

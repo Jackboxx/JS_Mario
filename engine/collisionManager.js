@@ -20,8 +20,7 @@ class CollisionManager {
             let enemy = manager.allEnemies()[i];
             for (let j = 0; j < manager.allFriendlyProjectiles().length; j++) {
                 let projectile = manager.allFriendlyProjectiles()[j];
-                console.log(manager.allFriendlyProjectiles());
-                if (CollisionManager.isTouching(enemy, projectile)) {
+                if (enemy.alive && CollisionManager.isTouching(enemy, projectile)) {
                     enemy.die();
                     projectile.impact();
                     break;
@@ -31,12 +30,36 @@ class CollisionManager {
             if (player.alive && enemy.alive && CollisionManager.isTouching(player, enemy)) player.onEnemyCollision(enemy);
         }
 
+        for (let i = 0; i < manager.allFriendlyProjectiles().length; i++) {
+            let projectile = manager.allFriendlyProjectiles()[i];
+
+            if (projectile.canCollide && !projectile.impacted) {
+                for (let j = 0; j < manager.allObjects().length; j++) {
+                    let object = manager.allObjects()[j];
+                    if (CollisionManager.isTouching(projectile, object)) {
+                        projectile.impact();
+                        break;
+                    }
+                }
+            }
+        }
+
         for (let i = 0; i < manager.allUnfriendlyProjectiles().length; i++) {
             let projectile = manager.allUnfriendlyProjectiles()[i];
             if (player.alive && CollisionManager.isTouching(player, projectile)) {
                 player.die();
                 projectile.impact();
                 break;
+            }
+
+            if (projectile.canCollide && !projectile.impacted) {
+                for (let j = 0; j < manager.allObjects().length; j++) {
+                    let object = manager.allObjects()[j];
+                    if (CollisionManager.isTouching(projectile, object)) {
+                        impact();
+                        break;
+                    }
+                }
             }
         }
     }

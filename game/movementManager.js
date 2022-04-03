@@ -17,6 +17,6 @@ export function moveEntities() {
 
     for (let i = 0; i < manager.allUnfriendlyProjectiles().length; i++) {
         let projectile = manager.allUnfriendlyProjectiles()[i];
-        if (!projectile.impacted) projectile.travel();
+        projectile.travel();
     }
 }

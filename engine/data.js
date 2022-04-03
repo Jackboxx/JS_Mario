@@ -33,6 +33,22 @@ const sprites = {
     "hammer_bro_dead": '../sprites/hammer_bro_dead.png',
     "hammer_l": '../sprites/hammer_l.png',
     "hammer_r": '../sprites/hammer_r.png',
+    "shotgun_l": '../sprites/shotgun_l.png',
+    "shotgun_r": '../sprites/shotgun_r.png',
+    "railgun_l": '../sprites/railgun_l.png',
+    "railgun_r": '../sprites/railgun_r.png',
+
+    "charge_1_l": '../sprites/charge_1_l.png',
+    "charge_1_r": '../sprites/charge_1_r.png',
+    "charge_2_l": '../sprites/charge_2_l.png',
+    "charge_2_r": '../sprites/charge_2_r.png',
+    "laser_1_l": '../sprites/laser_1_l.png',
+    "laser_1_r": '../sprites/laser_1_r.png',
+    "laser_2_l": '../sprites/laser_2_l.png',
+    "laser_2_r": '../sprites/laser_2_r.png',
+
+    "bullet_l": '../sprites/bullet_l.png',
+    "bullet_r": '../sprites/bullet_r.png',
     "block": '../sprites/block.png',
     "explosion_1": '../sprites/explosion_1.png',
     "explosion_2": '../sprites/explosion_2.png'
@@ -41,6 +57,8 @@ const sprites = {
 const sounds = {
     "juice": '../sounds/juice.mp3',
     "mario_jump": '../sounds/mario_jump.mp3',
+    "shotgun_shot": '../sounds/shotgun_shot.wav',
+    "railgun_shot": '../sounds/railgun_shot.wav',
 }
 
 export { layers, sprites, sounds };
