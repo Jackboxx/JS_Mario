@@ -9,10 +9,13 @@ let enemies = [];
 let objects = [];
 let projectilesFriendly = [];
 let projectilesUnfriendly = [];
+let items = [];
 let score = 0;
 let enemyAmount = 0;
 let enemyID = 0;
 let projectileID = 0;
+let itemID = 0;
+let weaponIsSpawned = false;
 let juiceOn = false;
 
 const scorePanel = document.getElementById('score');
@@ -41,6 +44,7 @@ class Manager extends Entity {
         objects = [];
         projectilesFriendly = [];
         projectilesUnfriendly = [];
+        items = [];
 
         for (let name in this.entities) {
             let entity = this.entities[name];
@@ -48,7 +52,7 @@ class Manager extends Entity {
             if (entity.layer === 'enemy') enemies.push(entity);
             if (entity.layer === 'projectile' && entity.friendly) projectilesFriendly.push(entity);
             if (entity.layer === 'projectile' && !entity.friendly) projectilesUnfriendly.push(entity);
-
+            if (entity.layer === 'item') items.push(entity);
         }
 
         scorePanel.innerText = 'Score: ' + score;
@@ -70,6 +74,10 @@ class Manager extends Entity {
 
     allUnfriendlyProjectiles() {
         return projectilesUnfriendly;
+    }
+
+    allItems() {
+        return items;
     }
 
     worldGravity() {
@@ -100,6 +108,10 @@ class Manager extends Entity {
         return projectileID;
     }
 
+    currentItemID() {
+        return itemID;
+    }
+
     increaseEnemyAmount() {
         enemyAmount++;
         enemyID++;
@@ -113,11 +125,23 @@ class Manager extends Entity {
         projectileID++;
     }
 
+    increaseItemID() {
+        itemID++;
+    }
+
     startJuice() {
         juiceOn = true;
         let music = new Audio(sounds['juice']);
         music.play();
         setInterval(this.startJuice, 484000);
+    }
+
+    setWeaponExists(value) {
+        weaponIsSpawned = value;
+    }
+
+    weaponExists() {
+        return weaponIsSpawned;
     }
 
     isJuiced() {

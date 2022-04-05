@@ -62,6 +62,14 @@ class CollisionManager {
                 }
             }
         }
+
+        for (let i = 0; i < manager.allItems().length; i++) {
+            let item = manager.allItems()[i];
+            if (player.alive && CollisionManager.isTouching(player, item)) {
+                item.pickUp(player);
+                break;
+            }
+        }
     }
 
     static isTouching(self, other) {

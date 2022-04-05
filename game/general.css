@@ -29,6 +29,7 @@ body {
     min-width: 10%;
     font-size: 2em;
     color: wheat;
+    font-weight: 900;
     padding: 10px;
     border: 3px black solid;
     background: url('../sprites/block.png');

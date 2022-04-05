@@ -4,6 +4,7 @@ const layers = {
     "2": "object",
     "3": "enemy",
     "4": "projectile",
+    "5": "item",
 }
 
 const sprites = {

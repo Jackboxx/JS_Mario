@@ -135,7 +135,6 @@ class Player extends Entity {
     }
 
     jump() {
-        if (!this.weapon) this.equipWeapon(new Shotgun(new Vector(this.position.x, this.position.y)));
         if (this.jumping || !this.grounded) return;
         this.startingHeight = this.position.y;
         this.jumping = true;
